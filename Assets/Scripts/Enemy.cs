@@ -6,8 +6,8 @@ public class Enemy : MonoBehaviour
 {
     public bool lookAtCouple, lookAway;
     public float originalAngle, lookAngle;
-    public Animator animator;
-    public GameObject mainModel, duplicateModel;
+    public Animator animator, fovanim;
+    public GameObject mainModel, duplicateModel, fov;
     void Start()
     {
         //  Invoke("LookAt", 4);
@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+
         if (true)
         {
             if (lookAtCouple)
@@ -57,6 +58,11 @@ public class Enemy : MonoBehaviour
     void LookAt()
     {
         animator.SetInteger("enemy", 1);
+        if(SingletonClass.instance.LEVEL_NO==2)
+        {
+            fovanim.Play("fov");
+        }
+        
         Invoke("LookAway", Random.Range(1, 4));
     }
 
@@ -69,6 +75,13 @@ public class Enemy : MonoBehaviour
         else
         {
             animator.SetInteger("enemy", 2);
+
+            if (SingletonClass.instance.LEVEL_NO == 2)
+            {
+
+                fovanim.Play("backfov");
+            }
+         
             Invoke("LookAt", Random.Range(1, 5));
         }
     }
